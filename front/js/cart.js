@@ -3,8 +3,7 @@
 const cartItems = document.getElementById('cart__items');
 const totalQuantity = document.getElementById('totalQuantity');
 const totalPrice = document.getElementById('totalPrice');
-//const itemsObject = JSON.parse(localStorage.getItem("selectedProducts"));
-//console.log(itemsObject);
+
 
 let total = 0;
 
@@ -16,37 +15,7 @@ function retrievedObject() {
 }
 
 const productIds = retrievedObject().map((product) => product.productId);
-//const productPrice = parseInt(retrievedObject().map((product)=> product.price))
-//const productQuantity = parseInt(retrievedObject().map((product)=> product.quantity))
 
-
-
-
-// var calculateTotals = () => {
-//     console.log('Calculating.. ');
-//     var allItems = retrievedObject();
-//     var totals = allItems.reduce((a, b) => {
-//         var aTotals = 0;
-//         var bTotals = 0;
-//         if (Object.keys(a).length !== 0 && a.constructor === Object) {
-//             aTotals = a.quantity * a.price;
-//         }
-
-//         if (Object.keys(b).length !== 0 && b.constructor === Object) {
-//             bTotals = b.quantity * b.price;
-//         }
-
-//         return aTotals + bTotals;
-//     }, 0);
-
-//     return totals;
-// };
-
-// var updateUI_CartTotals = () => {
-//     document.querySelector('#totalPrice').innerText = parseFloat(
-//         calculateTotals()
-//     );
-// };
 
 
 
@@ -93,7 +62,7 @@ function renderCartItems() {
      totalPrice.innerText = total;
       totalQuantity.innerText = totalQty;
 
-   // updateUI_CartTotals();
+   
 }
 
 renderCartItems();
@@ -107,7 +76,7 @@ var updateQuantity = (productId, color) => {
     var display = document.getElementById(`qtyPara_${productId}_${color}`);
     display.innerText = quantity.value;
 
-    //create a loop .map
+    
     const newProducts = retrievedObject()
         .map((product) => {
             if (product.productId == productId && product.color == color) {
@@ -127,7 +96,7 @@ var updateQuantity = (productId, color) => {
 
 
 function deleteItems(productId, color) {
-    //create a loop .map
+    
     const newProducts = retrievedObject()
         .map((product) => {
             if (product.productId == productId && product.color == color) {
@@ -138,33 +107,12 @@ function deleteItems(productId, color) {
         })
         .filter(Boolean);
     console.log({ newProducts, retrievedObject: retrievedObject() });
-    // retrievedObject.splice(index);
+    
     localStorage.setItem('selectedProducts', JSON.stringify(newProducts));
     renderCartItems();
 }
 
-// function calculateTotal(){
 
-//   cartItems.addEventListener('load', () =>{
-//     const orderItems = document.getElementById('cart__item')
-//     let total = 0
-
-//     for (let i = 0; i < orderItems.length; i++){
-//       let orderItem = orderItems[i]
-//       const priceEl = order.getElementById('pricePara')[0]
-//       const qtyEl = orderItem.getElementById('quantityPara')[0]
-//       itemPrice = priceEl.innerText.replace('€', '');
-//       itemQty = qtyEl.innerText.replace('Qté :', '');
-//       total += (itemPrice * itemQty)
-//       console.log(itemQty)
-//     }
-
-//   })
-
-// totalPrice.innerText = total;
-// }
-
-//form validation . why does my code not work?
 
 const form = document.querySelector('form');
 const firstName = document.getElementById('firstName');
@@ -224,18 +172,5 @@ document.querySelector('form').addEventListener('submit', (e) => {
             .catch((error) => console.error(error));
     }
 
-    // make a post request to the localhost:3000/api/products/order
-    // the body object should be the conatct an producs id's
-    /**
-     * let obj = {
-     * contact : {firstname : value , },
-     *
-     *products : []
-     * }
-     *
-     *
-     */
-    // if post is success
-    // you will recive a contact deials back with all products details  plus and orderId
-    // save orderId to localstorage and show on the confirmation page
+    
 });

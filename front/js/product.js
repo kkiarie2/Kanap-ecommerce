@@ -81,8 +81,7 @@ function addProduct(product)
         localStorage.setItem('selectedProducts',JSON.stringify(products));
     }else{
 
-        //findindx for non promatives like objects as accept a callback function 
-        //indexoF let arr = [1,2,3]  for primative vlaues onliy indexOf(2) => 1
+   
         let index = cart.findIndex(x=>x.productId == product.productId &x.color == product.color)
         console.log('index',index)
         if(index > -1){
@@ -95,11 +94,10 @@ function addProduct(product)
         
         localStorage.setItem('selectedProducts',JSON.stringify(cart));
     }
-    //console.log(cart)
+    
 }
 
 
-// I need to increase quantity of duplicate items instead of creating similar objects( Id + color)
 
 
 
