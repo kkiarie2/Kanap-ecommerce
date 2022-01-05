@@ -1,3 +1,4 @@
+//displays confirmation number on the confirmation page
 const queries = new URLSearchParams(window.location.search)
 const orderId = queries.get('orderId')
 console.log(orderId)

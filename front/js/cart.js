@@ -1,14 +1,16 @@
 //const { get } = require("https");
 
+
+//comments/documentation
+//fix confirmation page
+//
 const cartItems = document.getElementById('cart__items');
 const totalQuantity = document.getElementById('totalQuantity');
 const totalPrice = document.getElementById('totalPrice');
 
 
-let total = 0;
 
-let sumPrice = 0;
-
+//retrieves cart items from localStorage
 function retrievedObject() {
     var result = JSON.parse(localStorage.getItem('selectedProducts')) || [];
     return result;
@@ -20,7 +22,7 @@ const productIds = retrievedObject().map((product) => product.productId);
 
 
 
-
+//renders selected items on the cart page, and calculates total quantity and price
 
 function renderCartItems() {
     cartItems.innerHTML = '';
@@ -70,7 +72,7 @@ renderCartItems();
 
 
 
-
+// updates cart items quantity when the user changes the quantity on the cart page
 var updateQuantity = (productId, color) => {
     var quantity = document.getElementById(`qtyInput_${productId}_${color}`);
     var display = document.getElementById(`qtyPara_${productId}_${color}`);
@@ -94,7 +96,7 @@ var updateQuantity = (productId, color) => {
 
 
 
-
+//removes items from the cart on clicking delete
 function deleteItems(productId, color) {
     
     const newProducts = retrievedObject()
@@ -112,7 +114,7 @@ function deleteItems(productId, color) {
     renderCartItems();
 }
 
-
+//validates user information entered in the form
 
 const form = document.querySelector('form');
 const firstName = document.getElementById('firstName');
@@ -152,21 +154,25 @@ document.querySelector('form').addEventListener('submit', (e) => {
         const formData = new FormData(form);
         const formDataObject = Object.fromEntries(formData);
         console.log({ formDataObject });
-
+        //combines user information and cart items information 
         const orderInfo = {
             contact: {
                 ...formDataObject,
             },
             products: productIds,
         };
+
+        //sends the user information and cart items to the api
+
         fetch('http://localhost:3000/api/products/order', {
             method: 'post',
             body: JSON.stringify(orderInfo),
             headers: { 'Content-Type': 'application/json' },
         })
             .then((response) => response.json())
+        //redirects the user to the confirmation page
             .then((user) => {
-                window.location.href = `/front/html/confirmation.html?orderId=${user.orderId}`;
+                window.location.href = `./confirmation.html?orderId=${user.orderId}`;
                 console.log(user);
             })
             .catch((error) => console.error(error));

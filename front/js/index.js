@@ -8,7 +8,7 @@
  
          
 const apiUrl = 'http://localhost:3000/api/products';
-
+//requests product information from the api  and renders them on the page dynamically
 async function getInfo() {
     const response = await fetch(apiUrl);
     const data = await response.json();

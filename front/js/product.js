@@ -5,6 +5,7 @@
 const params = new URLSearchParams(window.location.search);
 let id = params.get('id')
 
+//requests product information from the api and renders it on the product page
 
 async function getData() {
     const response = await fetch('http://localhost:3000/api/products/'+id);
@@ -31,6 +32,7 @@ async function getData() {
 getData();
 
 
+//gathers selected product information and adds it to the cart array on clicking the "add to cart" button
 
 function createProductObject(){
 
@@ -68,11 +70,11 @@ function createProductObject(){
 
 
 
-
+//creates cart array, identifies items with same color and product ID, stores items in the cart/local storage
 
 function addProduct(product)
 {
-    // 1- get the localstorage 
+    
     const cart = JSON.parse(localStorage.getItem('selectedProducts'))
 
     if  (cart == null){
